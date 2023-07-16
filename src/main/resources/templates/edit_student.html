@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System by Koray</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student Management System by Koray</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/api/v1/students}">Student Management Page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center"> Edit Student</h1>
+            <div class="card-body">
+                <form id="studentForm" th:action="@{/api/v1/students/{id} (id=${student.id})}" th:object="${student}" method="POST">
+                    <div class="form-group">
+                        <label> Student First Name</label>
+                        <input id="first_name" type="text" name="firstName" th:field="*{firstName}"
+                               placeholder="Enter Student First Name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Student Last Name</label>
+                        <input id="last_name" type="text" name="lastName" th:field="*{lastName}"
+                               placeholder="Enter Student Last Name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Student First Name</label>
+                        <input id="email" type="text" name="email" th:field="*{email}" placeholder="Enter Student Email"
+                               class="form-control"/>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                        <a th:href="@{/api/v1/students}" class="btn btn-outline-danger btn-md mb-6 offset-md-7">Back to
+                            List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
