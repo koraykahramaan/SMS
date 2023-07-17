@@ -1,6 +1,9 @@
 package com.koray.studentmanagementsystem.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "student")
@@ -10,9 +13,15 @@ public class Student  {
     private Long id;
 
     @Column(name = "first_name", nullable = false)
+    @NotEmpty(message = "First name can not be empty")
+    @Size(min = 4,max = 50, message = "First name length should be between 4 and 50 characters")
     private String firstName;
+    @NotEmpty(message = "Last name can not be empty")
     @Column(name = "last_name")
+    @Size(min = 4,max = 50, message = "Last name length should be between 4 and 50 characters")
     private String lastName;
+    @NotEmpty(message = "Email can not be empty")
+    @Email(message = "Not valid email format")
     @Column(name = "email")
     private String email;
 

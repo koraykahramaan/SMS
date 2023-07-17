@@ -2,8 +2,12 @@ package com.koray.studentmanagementsystem.controller;
 
 import com.koray.studentmanagementsystem.entity.Student;
 import com.koray.studentmanagementsystem.service.StudentService;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/students")
 public class StudentController {
 
+    private final Logger logger = LoggerFactory.getLogger(StudentController.class);
     private final StudentService studentService;
 
     public StudentController(StudentService studentService) {
@@ -31,9 +36,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public String addStudent(@ModelAttribute("student") Student student) {
+    public String addStudent(@ModelAttribute("student") @Valid Student student, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "create_student";
+        }
         studentService.addStudent(student);
-        return "create_student";
+        model.addAttribute("student",null);
+        return "redirect:/api/v1/students/new";
     }
 
     @GetMapping("/edit/{id}")
@@ -43,7 +52,10 @@ public class StudentController {
     }
 
     @PostMapping("/{id}")
-    public String updateStudent(@PathVariable Long id, @ModelAttribute("student") Student student,Model model) {
+    public String updateStudent(@PathVariable Long id, @ModelAttribute("student") @Valid Student student,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "edit_student";
+        }
         studentService.updateStudent(id,student);
         return "redirect:/api/v1/students";
     }
