@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Student Management System by Koray</a>
+    <a class="navbar-brand" th:href="@{/api/v1/students}">Student Management System by Koray</a>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -38,32 +38,36 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class="text-center"> Create new Student</h1>
+            <h1 class="text-center">Edit Book</h1>
             <div class="card-body">
-                <form id="studentForm" th:action="@{/api/v1/students}" th:object="${student}" method="POST">
+                <form id="bookForm" th:action="@{/api/v1/books/edit/{id} (id=${book.id})}" th:object="${book}" method="POST">
                     <div class="form-group">
-                        <label> Student First Name</label>
-                        <input id="first_name" type="text" name="firstName" th:field="*{firstName}"
-                               placeholder="Enter Student First Name" class="form-control"/>
-                        <small class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+                        <label>Enter Book Name</label>
+                        <input id="book_name" type="text" name="bookName" th:field="*{bookName}"
+                        placeholder="Enter Book Name" class="form-control"/>
+                        <small class="text-danger" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}"></small>
                     </div>
                     <div class="form-group">
-                        <label> Student Last Name</label>
-                        <input id="last_name" type="text" name="lastName" th:field="*{lastName}"
-                               placeholder="Enter Student Last Name" class="form-control"/>
-                        <small class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+                        <label>Enter Book Type</label>
+                        <input id="book_type" type="text" name="bookType" th:field="*{bookType}"
+                        placeholder="Enter Amount" class="form-control"/>
+                        <small class="text-danger" th:if="${#fields.hasErrors('bookType')}" th:errors="*{bookType}"></small>
                     </div>
                     <div class="form-group">
-                        <label> Student Email</label>
-                        <input id="email" type="text" name="email" th:field="*{email}" placeholder="Enter Student Email"
-                               class="form-control"/>
-                        <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                        <label>Enter Author</label>
+                        <input id="author" type="text" name="author" th:field="*{author}"
+                        placeholder="Enter Author" class="form-control"/>
+                        <small class="text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></small>
                     </div>
-
+                    <div class="form-group">
+                        <label>Enter Amount</label>
+                        <input id="amount" type="text" name="amount" th:field="*{amount}"
+                        placeholder="Enter Amount" class="form-control"/>
+                        <small class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></small>
+                    </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-outline-primary">Submit</button>
-                        <a th:href="@{/api/v1/students}" class="btn btn-outline-danger btn-md mb-6 offset-md-7">Back to
-                            List</a>
+                        <a th:href="@{/api/v1/books}" class="btn btn-outline-danger btn-md mb-6 offset-md-7">Back to List</a>
                     </div>
                 </form>
             </div>
